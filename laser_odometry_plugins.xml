@@ -1,6 +1,6 @@
-<library path="lib/liblaser_odometry_polar">
+<library path="lib/liblaser_odometry_rf2o">
 
-  <class type="laser_odometry::LaserOdometryPolar" base_class_type="laser_odometry::LaserOdometryBase">
+  <class type="laser_odometry::LaserOdometryRf2o" base_class_type="laser_odometry::LaserOdometryBase">
    <description>
    This is a rectangle plugin (Hello World !)
    </description>

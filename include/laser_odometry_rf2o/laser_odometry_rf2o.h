@@ -3,7 +3,7 @@
 
 #include <laser_odometry_core/laser_odometry_core.h>
 
-#include <laser_odometry_csm/LaserOdometryRf2oParameters.h>
+// #include <laser_odometry_csm/LaserOdometryRf2oParameters.h>
 
 namespace laser_odometry
 {
@@ -12,8 +12,8 @@ namespace laser_odometry
   {
     using Base = LaserOdometryBase;
 
-    using Parameters = laser_odometry_polar::LaserOdometryRf2oParameters;
-    using ParametersPtr = std::shared_ptr<Parameters>;
+    // using Parameters = laser_odometry_polar::LaserOdometryRf2oParameters;
+    // using ParametersPtr = std::shared_ptr<Parameters>;
 
   public:
 
@@ -31,7 +31,11 @@ namespace laser_odometry
 
     bool initialized_ = false;
 
-    ParametersPtr params_ptr_;
+    double kf_dist_angular_;
+    double kf_dist_linear_;
+    double kf_dist_linear_sq_;
+
+    // ParametersPtr params_ptr_;
 
     //void convert(const sensor_msgs::LaserScanConstPtr& scan_msg,
     //             LDP& ldp_scan);
@@ -42,7 +46,7 @@ namespace laser_odometry
 
     void updateLaserPose();
 
-    bool isKeyFrame(const Transform& tf) override;
+    bool isKeyFrame(const tf::Transform& tf) override;
     void isKeyFrame() override;
     void isNotKeyFrame() override;
   };

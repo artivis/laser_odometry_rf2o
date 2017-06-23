@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(laser_odometry_polar)
+project(laser_odometry_rf2o)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
@@ -21,17 +21,17 @@ else()
 endif()
 
 find_package(catkin REQUIRED COMPONENTS
-    laser_odometry_core polar_scan_matcher rosparam_handler dynamic_reconfigure
+    laser_odometry_core rf2o_laser_odometry #rosparam_handler dynamic_reconfigure
 )
 
-generate_ros_parameter_files(
-  cfg/LaserOdometryPolar.params
-)
+#generate_ros_parameter_files(
+#  cfg/LaserOdometryPolar.params
+#)
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS laser_odometry_core polar_scan_matcher rosparam_handler dynamic_reconfigure #csm
+  CATKIN_DEPENDS laser_odometry_core rf2o_laser_odometry #rosparam_handler dynamic_reconfigure
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})
@@ -40,10 +40,10 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 ##   Build   ##
 ###############
 
-add_library(${PROJECT_NAME} src/laser_odometry_polar.cpp)
+add_library(${PROJECT_NAME} src/laser_odometry_rf2o.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg) # For dynamic_reconfigure
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_genparam) # For rosparam_handler
+#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg) # For dynamic_reconfigure
+#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_genparam) # For rosparam_handler
 
 ################
 ##  Install   ##
