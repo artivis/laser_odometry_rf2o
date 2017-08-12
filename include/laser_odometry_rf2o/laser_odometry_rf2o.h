@@ -3,10 +3,7 @@
 
 #include <laser_odometry_core/laser_odometry_base.h>
 
-//namespace
-//{
 class CLaserOdometry2D;
-//}
 
 namespace laser_odometry
 {
@@ -34,8 +31,6 @@ protected:
   bool configureImpl() override;
 
   bool initialize(const sensor_msgs::LaserScanConstPtr& scan_msg) override;
-
-//  void updateLaserPose();
 };
 
 } /* namespace laser_odometry */
