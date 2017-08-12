@@ -1,55 +1,42 @@
 #ifndef _LASER_ODOMETRY_RF2O_LASER_ODOMETRY_RF2O_H_
 #define _LASER_ODOMETRY_RF2O_LASER_ODOMETRY_RF2O_H_
 
-#include <laser_odometry_core/laser_odometry_core.h>
+#include <laser_odometry_core/laser_odometry_base.h>
 
-// #include <laser_odometry_csm/LaserOdometryRf2oParameters.h>
+//namespace
+//{
+class CLaserOdometry2D;
+//}
 
 namespace laser_odometry
 {
 
-  class LaserOdometryRf2o : public LaserOdometryBase
-  {
-    using Base = LaserOdometryBase;
+class LaserOdometryRf2o : public LaserOdometryBase
+{
+  using Base = LaserOdometryBase;
 
-    // using Parameters = laser_odometry_polar::LaserOdometryRf2oParameters;
-    // using ParametersPtr = std::shared_ptr<Parameters>;
+public:
 
-  public:
+  LaserOdometryRf2o()  = default;
+  ~LaserOdometryRf2o() = default;
 
-    LaserOdometryRf2o()  = default;
-    ~LaserOdometryRf2o() = default;
+  OdomType odomType() const noexcept override;
 
-    OdomType odomType() const noexcept override;
+protected:
 
-  protected:
+  bool process_impl(const sensor_msgs::LaserScanConstPtr& laser_msg,
+                    const Transform& /*prediction*/) override;
 
-    bool process_impl(const sensor_msgs::LaserScanConstPtr& laser_msg,
-                      const tf::Transform& prediction) override;
+protected:
 
-  protected:
+  CLaserOdometry2D rf2o_;
 
-    bool initialized_ = false;
+  bool configureImpl() override;
 
-    double kf_dist_angular_;
-    double kf_dist_linear_;
-    double kf_dist_linear_sq_;
+  bool initialize(const sensor_msgs::LaserScanConstPtr& scan_msg) override;
 
-    // ParametersPtr params_ptr_;
-
-    //void convert(const sensor_msgs::LaserScanConstPtr& scan_msg,
-    //             LDP& ldp_scan);
-
-    bool configureImpl() override;
-
-    bool initialize(const sensor_msgs::LaserScanConstPtr& scan_msg) override;
-
-    void updateLaserPose();
-
-    bool isKeyFrame(const tf::Transform& tf) override;
-    void isKeyFrame() override;
-    void isNotKeyFrame() override;
-  };
+//  void updateLaserPose();
+};
 
 } /* namespace laser_odometry */
 
