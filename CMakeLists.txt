@@ -1,8 +1,8 @@
-include_directories(SYSTEM ${catkin_INCLUDE_DIRS})
+cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
 project(laser_odometry_rf2o)
 
 find_package(catkin REQUIRED COMPONENTS
-    laser_odometry_core rf2o_laser_odometry #rosparam_handler dynamic_reconfigure
+  laser_odometry_core rf2o_laser_odometry #rosparam_handler dynamic_reconfigure
 )
 
 #generate_ros_parameter_files(
@@ -28,9 +28,13 @@ target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 #add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_genparam) # For rosparam_handler
 
 #Require C++11
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_EXTENSIONS OFF)
+if(CMAKE_VERSION VERSION_LESS "3.1")
+  set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-std=c++11")
+else()
+  set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
+  set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
+  set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_EXTENSIONS OFF)
+endif()
 
 ################
 ##  Install   ##
