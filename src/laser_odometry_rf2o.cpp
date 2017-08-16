@@ -22,12 +22,7 @@ bool LaserOdometryRf2o::process_impl(const sensor_msgs::LaserScanConstPtr& laser
 {
   rf2o_.odometryCalculation(*laser_msg);
 
-  const mrpt::poses::CPose3D& increment = rf2o_.getIncrement();
-
-  increment_(0,3) = increment.x();
-  increment_(1,3) = increment.y();
-
-  increment_.linear() = utils::matrixYaw<Scalar>(increment.yaw());
+  increment_ = rf2o_.getIncrement().cast<Scalar>();
 
   increment_covariance_ = utils::covariance2dTo3d(rf2o_.getIncrementCovariance().cast<Scalar>());
 

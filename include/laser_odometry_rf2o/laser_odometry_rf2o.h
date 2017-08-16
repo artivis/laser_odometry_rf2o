@@ -3,7 +3,9 @@
 
 #include <laser_odometry_core/laser_odometry_base.h>
 
+namespace rf2o {
 class CLaserOdometry2D;
+}
 
 namespace laser_odometry
 {
@@ -26,7 +28,7 @@ protected:
 
 protected:
 
-  CLaserOdometry2D rf2o_;
+  rf2o::CLaserOdometry2D rf2o_;
 
   bool configureImpl() override;
 
