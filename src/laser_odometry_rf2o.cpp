@@ -2,6 +2,7 @@
 
 #include <laser_odometry_core/laser_odometry_utils.h>
 #include <laser_odometry_rf2o/laser_odometry_rf2o.h>
+//#include <laser_odometry_core/laser_odometry_conversion.h>
 
 #include <pluginlib/class_list_macros.h>
 
@@ -31,9 +32,18 @@ bool LaserOdometryRf2o::process_impl(const sensor_msgs::LaserScanConstPtr& laser
 
 bool LaserOdometryRf2o::initialize(const sensor_msgs::LaserScanConstPtr& scan_msg)
 {
-  geometry_msgs::Pose identity;
+  geometry_msgs::Pose origin;
+//  conversion::toRos(fixed_origin_, origin);
 
-  rf2o_.init(*scan_msg, identity);
+  origin.position.x = 0;
+  origin.position.y = 0;
+  origin.position.z = 0;
+
+  tf::quaternionTFToMsg(tf::Quaternion::getIdentity(), origin.orientation);
+
+  rf2o_.init(*scan_msg, origin);
+
+//  rf2o_.setLaserPose(base_to_laser_);
 
   return rf2o_.is_initialized();
 }
