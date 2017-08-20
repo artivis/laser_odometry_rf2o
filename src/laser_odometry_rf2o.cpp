@@ -18,8 +18,8 @@ bool LaserOdometryRf2o::configureImpl()
   return true;
 }
 
-bool LaserOdometryRf2o::process_impl(const sensor_msgs::LaserScanConstPtr& laser_msg,
-                                     const Transform& /*prediction*/)
+bool LaserOdometryRf2o::processImpl(const sensor_msgs::LaserScanConstPtr& laser_msg,
+                                    const Transform& /*prediction*/)
 {
   rf2o_.odometryCalculation(*laser_msg);
 
