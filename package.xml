@@ -14,7 +14,7 @@
   <!-- this package license -->
   <license>Apache-2.0</license>
 
-  <!-- libpointmatcher license -->
+  <!-- rf2o license -->
   <license>GPLv3</license>
   <url type="website">https://github.com/MAPIRlab/rf2o_laser_odometry</url>
 
