@@ -39,7 +39,10 @@ bool LaserOdometryRf2o::initialize(const sensor_msgs::LaserScanConstPtr& scan_ms
   origin.position.y = 0;
   origin.position.z = 0;
 
-  tf::quaternionTFToMsg(tf::Quaternion::getIdentity(), origin.orientation);
+  origin.orientation.x = 0;
+  origin.orientation.y = 0;
+  origin.orientation.z = 0;
+  origin.orientation.w = 1;
 
   rf2o_.init(*scan_msg, origin);
 
